@@ -18,20 +18,20 @@ main:
   mov rax, 0        ; read(
   mov rdi, 2        ; STDIN_FILENO,
   mov rsi, num      ; num,
-  mov rdx, numlen   ; numlen
+  mov rdx, 9        ; numlen
   syscall           ; );
 
-  mov rax, 1        ; write(
-  mov rdi, 1        ; STDOUT_FILENO,
-  mov rsi, resmsg   ; resmsg,
-  mov rdx, resmsglen; resmsglen
-  syscall           ; );
+  mov rax, 1         ; write(
+  mov rdi, 1         ; STDOUT_FILENO,
+  mov rsi, resmsg    ; resmsg,
+  mov rdx, resmsglen ; resmsglen
+  syscall            ; );
 
-  mov rax, 1        ; write(
-  mov rdi, 1        ; STDOUT_FILENO,
-  mov rsi, num      ; num,
-  mov rdx, numlen   ; numlen
-  syscall           ; );
+  mov rax, 1             ; write(
+  mov rdi, 1             ; STDOUT_FILENO,
+  mov rsi, num           ; num,
+  mov rdx, 9             ; sizeof(num)
+  syscall                ; );
   
   mov rax, 1        ; write(
   mov rdi, 1        ; STDOUT_FILENO,
@@ -48,7 +48,8 @@ section .data
   msglen: equ $ - msg
   msg2: db "Enter number or word (8 symbols max):", 10
   msg2len: equ $ - msg2
-  num: dq 0
-  numlen: equ $ - num
   resmsg: db "You entered: "
   resmsglen: equ $ - resmsg
+
+section .bss
+  num resb 9
