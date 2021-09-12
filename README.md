@@ -5,6 +5,4 @@ I use linux x64 syscalls.
 For learning assembly purposes only.
 You need ``gcc`` and ``nasm`` compilers.
 Command:
-``sh
-nasm -o hello.o -f elf64 hello.s && gcc -o hello hello.o
-`` 
+``nasm -o hello.o -f elf64 hello.s && gcc -o hello hello.o``
