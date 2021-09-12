@@ -62,7 +62,7 @@ main:
 
   call exitprogram ; exit program
 
-section .data
+section .data ; defined variables
   msg: db "Hello, world!", 10
   msglen: equ $ - msg
   msg2: db "Enter number or word (8 symbols max):", 10
@@ -71,4 +71,4 @@ section .data
   resmsglen: equ $ - resmsg
 
 section .bss
-  num resb 9
+  num resb 9 ; unintialized variable for user input (9 bytes)
