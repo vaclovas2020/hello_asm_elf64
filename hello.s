@@ -1,20 +1,9 @@
 global main
+global getinput
 
 section .text
 
-main:
-  mov rax, 1        ; write(
-  mov rdi, 1        ;   STDOUT_FILENO,
-  mov rsi, msg      ;   "Hello, world!\n",
-  mov rdx, msglen   ;   sizeof("Hello, world!\n")
-  syscall           ; );
-  
-  mov rax, 1        ; write(
-  mov rdi, 1        ; STDOUT_FILENO,
-  mov rsi, msg2     ; "Enter number:\n",
-  mov rdx, msg2len  ; sizeof("Enter number:\n")
-  syscall           ; );
-
+getinput:
   mov rax, 0        ; read(
   mov rdi, 2        ; STDIN_FILENO,
   mov rsi, num      ; num,
@@ -32,12 +21,28 @@ main:
   mov rsi, num           ; num,
   mov rdx, 9             ; sizeof(num)
   syscall                ; );
-  
+
   mov rax, 1        ; write(
   mov rdi, 1        ; STDOUT_FILENO,
   mov rsi, 10       ; "\n",
   mov rdx, 1        ; sizeof("\n")
   syscall           ; );
+  ret               ; end gettext function
+
+main:
+  mov rax, 1        ; write(
+  mov rdi, 1        ;   STDOUT_FILENO,
+  mov rsi, msg      ;   "Hello, world!\n",
+  mov rdx, msglen   ;   sizeof("Hello, world!\n")
+  syscall           ; );
+  
+  mov rax, 1        ; write(
+  mov rdi, 1        ; STDOUT_FILENO,
+  mov rsi, msg2     ; "Enter number:\n",
+  mov rdx, msg2len  ; sizeof("Enter number:\n")
+  syscall           ; );
+
+  call getinput
 
   mov rax, 60       ; exit(
   mov rdi, 0        ;   EXIT_SUCCESS
