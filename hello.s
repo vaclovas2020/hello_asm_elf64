@@ -54,13 +54,13 @@ exitprogram:
   ret               ; end exitprogram
 
 main:
-  call printhello
+  call printhello   ; print "Hello World\n"
   
-  call printmessage
+  call printmessage ; print "Enter number or word (8 symbols max):\n"
 
-  call getinput
+  call getinput     ; get user input (8 bytes long + 1 reserved byte for zero-bit)
 
-  call exitprogram
+  call exitprogram ; exit program
 
 section .data
   msg: db "Hello, world!", 10
