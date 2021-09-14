@@ -2,23 +2,18 @@ global main
 global getinput
 global printhello
 global printmessage
+extern puts ; use puts function from C stdlib
 
 section .text
 
 printmessage:
-  mov rax, 1        ; write(
-  mov rdi, 1        ; STDOUT_FILENO,
-  mov rsi, msg2     ; "Enter number:\n",
-  mov rdx, msg2len  ; sizeof("Enter number:\n")
-  syscall           ; );
+  mov rdi, msg2       ; puts(msg2
+  call puts   WRT ..plt ; )
   ret               ; end printmessage
 
 printhello:
-  mov rax, 1        ; write(
-  mov rdi, 1        ;   STDOUT_FILENO,
-  mov rsi, msg      ;   "Hello, world!\n",
-  mov rdx, msglen   ;   sizeof("Hello, world!\n")
-  syscall           ; );
+  mov rdi, msg      ;   puts( "Hello, world!\n"
+  call puts   WRT ..plt    ;   );
   ret               ; end printhello
 
 getinput:
@@ -63,10 +58,8 @@ main:
   call exitprogram ; exit program
 
 section .data ; defined variables
-  msg: db "Hello, world!", 10
-  msglen: equ $ - msg
-  msg2: db "Enter number or word (8 symbols max):", 10
-  msg2len: equ $ - msg2
+  msg: db "Hello, world!", 0
+  msg2: db "Enter number or word (8 symbols max):", 0
   resmsg: db "You entered: "
   resmsglen: equ $ - resmsg
 
